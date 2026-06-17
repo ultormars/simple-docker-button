@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Button Clicks</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .counter {
+            font-size: 48px;
+            font-weight: bold;
+            color: #007bff;
+            margin: 20px 0;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Docker Button</h1>
+        <p>Simple PostgreSQL database counter.</p>
+        <div class="counter" id="sayac">{{ toplam_tiklama }}</div>
+        <button class="btn" onclick="tikla()">Press the button</button>
+    </div>
+
+    <script>
+        function tikla() {
+            fetch('/tikla', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('sayac').innerText = data.yeni_sayi;
+                });
+        }
+    </script>
+
+</body>
+</html>
